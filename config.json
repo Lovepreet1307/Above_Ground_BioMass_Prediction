@@ -1,0 +1,9 @@
+{
+    "dataset_path": "PRF_I5_2000_band_VI_data_norm(in).csv",
+    "results_csv_path": "model_metrics.csv",
+    "predictions_dir": "predictions",
+    "test_size": 0.1,
+    "cv_folds": 10,
+    "random_state": 42,
+    "metric": "r2"
+}
