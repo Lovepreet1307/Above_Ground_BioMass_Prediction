@@ -1,1 +1,1 @@
-["age", "site_index", "band7_mean", "band5_mean", "SAVI_mean", "Chlorophyll_mean", "band1_mean", "band4_mean", "band2_mean", "GlobalVegetationMoisture_mean", "NIRGreenDifference_mean", "area", "PanNDVI_mean", "EnhancedVegetationIndex_mean"]
+["age", "site_index", "band7_mean", "band5_mean", "Chlorophyll_mean", "band4_mean", "band1_mean", "GlobalVegetationMoisture_mean", "band2_mean", "NDVI_mean", "EnhancedVegetationIndex_mean", "band3_mean", "AWEIsh_mean"]
