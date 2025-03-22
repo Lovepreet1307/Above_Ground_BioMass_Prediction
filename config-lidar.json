@@ -1,0 +1,9 @@
+{
+    "dataset_path": "tvol_lidarLiveP(in).csv",
+    "results_csv_path": "model_metrics1.csv",
+    "predictions_dir": "predictions1",
+    "test_size": 0.1,
+    "cv_folds": 10,
+    "random_state": 42,
+    "metric": "r2"
+}
