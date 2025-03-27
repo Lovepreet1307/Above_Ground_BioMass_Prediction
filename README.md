@@ -56,7 +56,7 @@ The predictions from Stage 1 models are used as features for a second-stage pred
   - **Random Forest**
   - **Gradient Boosting**
   - **Linear Regression**
-  - **Averaging Ensemble** (mean of all model predictions)
+  - **Simple Averaging** of predictions from Stage 1 models is used.
 - **Feature Selection** is also applied to Stage 1 predictions.
 
 # LiDAR Dataset
