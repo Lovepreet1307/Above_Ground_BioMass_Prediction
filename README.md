@@ -4,9 +4,28 @@ This repository presents a machine learning framework for predicting forest **Ab
 
 ---
 
+# Problem Statement
+
+Accurately estimating AGB is crucial for forest management and climate change mitigation. While traditional field-based measurements are accurate, they are resource-intensive. Remote sensing provides scalable alternatives, but challenges like feature redundancy, sensor variability, and overfitting persist.
+
+This project addresses these challenges using:
+- Baseline modeling,
+- Systematic feature selection,
+- Multi-model ensembling, and
+- Meta-level learning.
+
+---
+
 # Project Workflow Overview
 
-The complete pipeline consists of two main stages:
+# Baseline Modeling
+
+For each dataset, we begin by training the following **baseline models** using the full feature set:
+- **Linear Regression (LR)**
+- **Random Forest Regressor (RF)**
+- **XGBoost Regressor (XGB)**
+
+These models serve as performance references.
 
 # Stage 1: Baseline and Feature-Optimized Modeling
 
@@ -28,17 +47,21 @@ The complete pipeline consists of two main stages:
 
 # Stage 2: Meta-Level Modeling
 
-- **Purpose**: Combine predictions from Stage 1 to build a second-stage model.
-- **Approaches Used**:
-  - **Landsat-8**:
-    - Performs additional feature selection on Stage 1 model predictions.
-    - Trains meta-models: **Random Forest**, **Gradient Boosting**, and **Linear Regression**.
-  - **LiDAR**:
-    - Uses **simple averaging** of Stage 1 predictions to reduce error and improve generalization.
-- **Outputs**:
-  - Test set predictions
-  - Final performance metrics
-  - Final saved models for deployment
+The predictions from Stage 1 models are used as features for a second-stage prediction.
+
+# Landsat-8 Dataset
+- **Meta-models trained on first-stage predictions**:
+  - **Random Forest**
+  - **Gradient Boosting**
+  - **Linear Regression**
+  - **Averaging Ensemble** (mean of all model predictions)
+- **Feature Selection** is also applied to Stage 1 predictions.
+
+# LiDAR Dataset
+- **Simple Averaging** of predictions from Stage 1 models is used.
+  - No second-stage meta-models are trained.
+  - This approach stabilizes predictions and reduces overfitting.
+
 
 ---
 
