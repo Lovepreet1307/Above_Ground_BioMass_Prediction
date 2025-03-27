@@ -27,23 +27,25 @@ For each dataset, we begin by training the following **baseline models** using t
 
 These models serve as performance references.
 
-# Stage 1: Baseline and Feature-Optimized Modeling
+# Stage 1: Feature Selection + Optimized Model Training
 
-- **Purpose**: Train individual models on the original datasets using various feature selection techniques to generate predictions and metrics.
-- **Key Steps**:
-  1. **Data Splitting**: Dataset is split into training and test sets.
-  2. **Feature Selection Techniques**:
-     - **Random Forest (RF)** feature importance
-     - **RFE with RF**
-     - **XGBoost feature importance**
-     - **Hybrid (RF + XGB)**
-  3. **Model Training**:
-     - Trains models such as **Random Forest** and **XGBoost** on top-k selected features.
-     - Performs **K-Fold Cross-Validation** to select best feature subset size (`k`).
-  4. **Model Saving**:
-     - Saves trained models and selected features.
-     - Stores predictions on both training and test sets.
-     - Outputs performance metrics (MAE, MSE, R²).
+This stage involves:
+1. **Feature Selection Methods**:
+   - **Random Forest (RF) importance**
+   - **RFE with RF**
+   - **XGBoost importance**
+   - **Hybrid method (average of RF and XGB)**
+2. **Model Training**:
+   - Each feature subset is evaluated using:
+     - **Random Forest**
+     - **XGBoost**
+   - Models are trained using **K-Fold Cross-Validation**.
+   - Optimal number of top-k features is selected based on MAE, MSE, or R².
+3. **Outputs**:
+   - Trained models (`.pkl`)
+   - Selected features (`.json`)
+   - Predictions (`cv_train_predictions.csv`)
+   - Performance metrics (`.csv`)
 
 # Stage 2: Meta-Level Modeling
 
