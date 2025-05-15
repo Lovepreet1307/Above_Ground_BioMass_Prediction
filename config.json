@@ -1,5 +1,5 @@
 {
-    "dataset_path": "PRF_I5_2000_band_VI_data_norm(in).csv",
+    "dataset_path": "prf2000_mean_raw_Aug_9input_QMinMax(in).csv",
     "results_csv_path": "model_metrics.csv",
     "predictions_dir": "predictions",
     "test_size": 0.1,
