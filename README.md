@@ -18,52 +18,79 @@ This project addresses these challenges using:
 
 # Project Workflow Overview
 
-# Baseline Modeling
+## 📂 Dataset Description
 
-For each dataset, we begin by training the following **baseline models** using the full feature set:
-- **Linear Regression (LR)**
-- **Random Forest Regressor (RF)**
-- **XGBoost Regressor (XGB)**
+The study uses four distinct datasets derived from the PRF supersite:
 
-These models serve as performance references.
+1. **PRF-Landsat8-9**
+   - **Description:** Raw Landsat-8 dataset with 9 features
+   - **Features:** 6 spectral bands (B1–B5, B7) + 3 biophysical attributes (AREA, AGE, SITE_INDEX)
+   - **Samples:** 624 plots
+   - **Year:** 2000
 
-# Stage 1: Feature Selection + Optimized Model Training
+2. **PRF-Landsat8-54**
+   - **Description:** Engineered Landsat-8 dataset with polynomial features
+   - **Features:** 9 raw features + 45 polynomial/interaction terms (total = 54)
+   - **Samples:** 624 plots
+   - **Year:** 2000
 
-This stage involves:
-1. **Feature Selection Methods**:
-   - **Random Forest (RF) importance**
-   - **RFE with RF**
-   - **XGBoost importance**
-   - **Hybrid method (average of RF and XGB)**
-2. **Model Training**:
-   - Each feature subset is evaluated using:
-     - **Random Forest**
-     - **XGBoost**
-   - Models are trained using **K-Fold Cross-Validation**.
-   - Optimal number of top-k features is selected based on MAE, MSE, or R².
-3. **Outputs**:
-   - Trained models (`.pkl`)
-   - Selected features (`.json`)
-   - Predictions (`cv_train_predictions.csv`)
-   - Performance metrics (`.csv`)
+3. **PRF-LiDAR-36**
+   - **Description:** LiDAR-derived structural metrics
+   - **Features:** 36 structural features (height percentiles, distribution metrics)
+   - **Samples:** 249 plots
+   - **Collection:** Airborne Laser Scanning (ALS)
 
-# Stage 2: Meta-Level Modeling
+4. **PRF-LiDAR-702**
+   - **Description:** High-dimensional LiDAR dataset with polynomial expansion
+   - **Features:** 36 raw features + 666 polynomial/interaction terms (total = 702)
+   - **Samples:** 249 plots
+   - **Collection:** Airborne Laser Scanning (ALS)
 
-The predictions from Stage 1 models are used as features for a second-stage prediction.
+---
 
-# Landsat-8 Dataset
-- **Meta-models trained on first-stage predictions**:
-  - **Random Forest**
-  - **Gradient Boosting**
-  - **Linear Regression**
-  - **Simple Averaging** of predictions from Stage 1 models is used.
-- **Feature Selection** is also applied to Stage 1 predictions.
+## 🏗️ Project Architecture
 
-# LiDAR Dataset
-- **Simple Averaging** of predictions from Stage 1 models is used.
-  - No second-stage meta-models are trained.
-  - This approach stabilizes predictions and reduces overfitting.
-  
+### **Phase 1: Data Preprocessing**
+- MinMax normalization to [0, 1] range  
+- 90:10 train-test split  
+- No missing value imputation required  
+
+### **Phase 2: Baseline Modeling**
+- Models:  
+  - Linear Regression (LR)  
+  - Random Forest Regressor (RF)  
+  - XGBoost Regressor (XGB)  
+- Evaluation: 10-fold cross-validation  
+- Metrics: MAE, MSE, R²  
+
+### **Phase 3: Stage 1 – Feature Selection & Base Model Training**
+- **Feature Selection Methods:**
+  - RF Importance (feature ranking from Random Forests)  
+  - RFE with RF (Recursive Feature Elimination with RF estimator)  
+  - XGB Importance (feature ranking from XGBoost)  
+  - Hybrid RF-XGB (average of RF and XGB importance scores)  
+
+- **Model Training:**
+  - Train RF and XGB models on selected features  
+  - Determine optimal feature count (k*) via cross-validation  
+  - Perform hyperparameter tuning using GridSearchCV  
+  - Build a pool of base models with varying feature subset sizes  
+
+### **Phase 4: Stage 2 – Ensemble Modeling**
+- **Random Model Averaging**
+  - Average predictions from k randomly selected models  
+  - Test different ensemble sizes (k = 10, 20, ..., K_max)  
+
+- **Top-k Model Averaging**
+  - Average predictions from k best-performing models (based on CV R²)  
+  - Emphasizes high-performing base models  
+
+- **Meta-Learning with Feature Selection**
+  - Use Stage 1 predictions as meta-features  
+  - Apply feature selection on the prediction matrix  
+  - Train a Linear Regression meta-model on selected predictions  
+  - Optimize subset size based on test performance  
+
 # Requirements
 
 To run this project, you need the following Python packages:
