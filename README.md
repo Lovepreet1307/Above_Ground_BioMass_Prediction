@@ -63,7 +63,16 @@ The predictions from Stage 1 models are used as features for a second-stage pred
 - **Simple Averaging** of predictions from Stage 1 models is used.
   - No second-stage meta-models are trained.
   - This approach stabilizes predictions and reduces overfitting.
+  
+# Requirements
 
+To run this project, you need the following Python packages:
+
+- numpy
+- pandas
+- scikit-learn
+- xgboost
+- joblib
 
 ---
 
