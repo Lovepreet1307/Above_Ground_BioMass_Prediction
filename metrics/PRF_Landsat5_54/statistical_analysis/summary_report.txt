@@ -1,0 +1,31 @@
+================================================================================
+STATISTICAL ANALYSIS SUMMARY REPORT
+Dataset: PRF_Landsat5_54
+================================================================================
+
+--- 1. STATISTICAL SIGNIFICANCE ---
+Best Stage 1 Model: RFE_RF_XGB_Top20
+  Mean CV R²: 0.7210 ± 0.0878
+  Significantly better than baseline (R²=0): YES (p < 0.05)
+
+Best Stage 2 Model: TopKAverage_TopK30
+  Mean CV R²: 0.7737 ± 0.0572
+  Significantly better than baseline (R²=0): YES (p < 0.05)
+
+Stage 2 vs Stage 1 (Paired t-test):
+  Difference in R²: 0.0527
+  p-value: 0.2066
+  Significantly different: NO
+
+--- 2. STABILITY ANALYSIS ---
+Average CV% - Stage 1: 10.67%
+Average CV% - Stage 2: 7.82%
+Stability improvement: 26.6%
+
+--- 3. INTERPRETABILITY ---
+Meta-Model Type: Linear Regression
+Number of base learners: 6
+Dominant model: RF_XGB_Top36 (weight=0.3126)
+Positive contributors: 5
+Negative contributors: 1 (bias correction)
+Redundant models: 0
