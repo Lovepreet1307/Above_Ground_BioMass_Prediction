@@ -1,0 +1,11 @@
+{
+    "dataset_path": "PRF_Landsat5_9",
+    "results_csv_path": "model_metrics.csv",
+    "predictions_dir": "predictions",
+    "subset_k_start": 10,
+    "subset_k_step": 60,
+    "test_size": 0.1,
+    "cv_folds": 10,
+    "random_state": 42,
+    "metric": "r2"
+}
