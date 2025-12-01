@@ -1,0 +1,31 @@
+================================================================================
+STATISTICAL ANALYSIS SUMMARY REPORT
+Dataset: PRF_LiDAR_36
+================================================================================
+
+--- 1. STATISTICAL SIGNIFICANCE ---
+Best Stage 1 Model: XGB_XGB_Top10
+  Mean CV R²: 0.6349 ± 0.1910
+  Significantly better than baseline (R²=0): YES (p < 0.05)
+
+Best Stage 2 Model: FS_MetaModel_TopK10
+  Mean CV R²: 0.6906 ± 0.1705
+  Significantly better than baseline (R²=0): YES (p < 0.05)
+
+Stage 2 vs Stage 1 (Paired t-test):
+  Difference in R²: 0.0557
+  p-value: 0.4254
+  Significantly different: NO
+
+--- 2. STABILITY ANALYSIS ---
+Average CV% - Stage 1: 27.65%
+Average CV% - Stage 2: 26.22%
+Stability improvement: 5.2%
+
+--- 3. INTERPRETABILITY ---
+Meta-Model Type: Linear Regression
+Number of base learners: 6
+Dominant model: RFE_RF_RF_Top32 (weight=2.1744)
+Positive contributors: 4
+Negative contributors: 2 (bias correction)
+Redundant models: 0
