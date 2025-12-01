@@ -1,6 +1,6 @@
 # Multi-Stage Hybrid Modeling for Above-Ground Biomass Estimation
 
-This repository presents a machine learning framework for predicting forest **Above-Ground Biomass (AGB)** using remote sensing datasets (Landsat-8 and LiDAR) from the **Petawawa Research Forest (PRF), Canada**. The approach leverages **multi-stage modeling**, **feature selection techniques**, and **ensemble learning** to improve predictive performance.
+This repository presents a machine learning framework for predicting forest **Above-Ground Biomass (AGB)** using remote sensing datasets (Landsat-5 and LiDAR) from the **Petawawa Research Forest (PRF), Canada**. The approach leverages **multi-stage modeling**, **feature selection techniques**, and **ensemble learning** to improve predictive performance.
 
 ---
 
@@ -51,18 +51,11 @@ This stage involves:
 
 The predictions from Stage 1 models are used as features for a second-stage prediction.
 
-# Landsat-8 Dataset
 - **Meta-models trained on first-stage predictions**:
-  - **Random Forest**
-  - **Gradient Boosting**
   - **Linear Regression**
   - **Simple Averaging** of predictions from Stage 1 models is used.
-- **Feature Selection** is also applied to Stage 1 predictions.
-
-# LiDAR Dataset
-- **Simple Averaging** of predictions from Stage 1 models is used.
-  - No second-stage meta-models are trained.
-  - This approach stabilizes predictions and reduces overfitting.
+  - **Top-k Averaging** of predictions from Stage 1 models is used.
+  - **Feature Selection** is also applied to Stage 1 predictions.
 
 
 ---
